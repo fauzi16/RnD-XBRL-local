@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-deployment
+  labels:
+    app: consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+        - name: consumer
+          image: kaysush/keda-kafka-consumer:0.1
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          env:
+            - name: SR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: api_key
+            - name: SR_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: api_secret
+            - name: KAFKA_TOPIC
+              value: "keda-demo-topic"
+            - name: BOOTSTRAP_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: bootstrap_server

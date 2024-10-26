@@ -1,0 +1,27 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: kafka-scaledobject
+  namespace: default
+  labels:
+    deploymentName: consumer-deployment
+spec:
+  scaleTargetRef:
+    name: consumer-deployment
+  pollingInterval: 5
+  minReplicaCount: 1
+  maxReplicaCount: 10  # Max can go upto num of partitions you have in the topic
+  triggers:
+    - type: kafka
+      metadata:
+        consumerGroup: my-kafka-consumer-group
+        bootstrapServers: pkc-n3603.us-central1.gcp.confluent.cloud:9092
+        topic: keda-demo-topic
+        lagThreshold: "10"
+        offsetRestPolicy: latest
+        sasl: plaintext
+        tls: enable
+      authenticationRef:
+        name: keda-kafka-credentials
+
+
