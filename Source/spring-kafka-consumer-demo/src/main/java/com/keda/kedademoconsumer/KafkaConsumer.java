@@ -10,7 +10,7 @@ public class KafkaConsumer {
     @Value("${spring.kafka.properties.bootstrap.servers}")
     private String bootstrapServers;
 
-    private Integer delay = 1000;
+    private Integer delay = 5000;
 
     @KafkaListener(topics = "${kafka.topic}", groupId = "${kafka.consumer-group-id}")
     public void handle(String message) throws InterruptedException {

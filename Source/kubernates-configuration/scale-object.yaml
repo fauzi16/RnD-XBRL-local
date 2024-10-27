@@ -1,0 +1,25 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: kafka-scaledobject
+  namespace: default
+  labels:
+    deploymentName: consumer-deployment
+spec:
+  scaleTargetRef:
+    name: consumer-deployment
+  pollingInterval: 5
+  minReplicaCount: 1
+  maxReplicaCount: 5  # Max can go upto num of partitions you have in the topic
+  triggers:
+    - type: kafka
+      metadata:
+        consumerGroup: generate-report-service-consumer-group
+        bootstrapServers: host.docker.internal:9092
+        topic: xbrl-instance-extracted
+        lagThreshold: "5"
+        offsetRestPolicy: latest
+        # sasl: plaintext
+        # tls: enable
+      # authenticationRef:
+      #   name: keda-kafka-credentials
