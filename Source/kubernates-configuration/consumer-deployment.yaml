@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: consumer-deployment
+  name: keda-demo-consumer-deployment
   labels:
-    app: consumer
+    app: keda-demo-consumer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: consumer
+      app: keda-demo-consumer
   template:
     metadata:
       labels:
-        app: consumer
+        app: keda-demo-consumer
     spec:
       containers:
-        - name: consumer
+        - name: keda-demo-consumer
           image: keda-demo-consumer:0.0.1-SNAPSHOT
           imagePullPolicy: IfNotPresent
           ports:

@@ -8,4 +8,4 @@ spec:
   - port: 8080    # Port yang digunakan oleh service
     targetPort: 8080  # Port yang digunakan oleh container
   selector:
-    app: consumer  # Pastikan label ini sesuai dengan deployment
+    app: keda-demo-consumer  # Pastikan label ini sesuai dengan deployment

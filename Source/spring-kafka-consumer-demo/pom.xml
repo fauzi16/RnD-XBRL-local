@@ -49,11 +49,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- <configuration>
+                <configuration>
                     <docker>
-                        <host>//./pipe/dockerDesktopLinuxEngine</host>
+                        <!-- <host>//./pipe/dockerDesktopLinuxEngine</host> -->
+                        <host>http://127.0.0.1:53979</host>
                     </docker>
-                </configuration> -->
+                </configuration>
             </plugin>
         </plugins>
     </build>

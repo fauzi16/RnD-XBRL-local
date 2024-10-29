@@ -1,13 +1,13 @@
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
-  name: kafka-scaledobject
+  name: keda-demo-consumer-scaledobject
   namespace: default
   labels:
-    deploymentName: consumer-deployment
+    deploymentName: keda-demo-consumer-deployment
 spec:
   scaleTargetRef:
-    name: consumer-deployment
+    name: keda-demo-consumer-deployment
   pollingInterval: 5
   minReplicaCount: 1
   maxReplicaCount: 5  # Max can go upto num of partitions you have in the topic
